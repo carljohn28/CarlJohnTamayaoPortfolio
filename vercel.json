@@ -1,4 +1,11 @@
 {
-  "buildCommand": "echo 'skip build'",
-  "outputDirectory": "dist/carljohntamayaoportfolio"
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist/cjportfolio"
+      }
+    }
+  ]
 }
