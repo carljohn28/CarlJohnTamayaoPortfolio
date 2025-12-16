@@ -1,14 +1,16 @@
 import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
 
 declare var FinisherHeader: any;
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  standalone: true,
+  imports: [CommonModule, MatIconModule]
 })
-
-
 export class AppComponent implements AfterViewInit {
 
 
@@ -21,7 +23,7 @@ export class AppComponent implements AfterViewInit {
   title = 'cjportfolio';
 
   stack = 1;
-  tools: number;
+tools = 0;
 
   selectedTab: string = 'stack'; // Default active is Tech Stack
   clickStack() {
