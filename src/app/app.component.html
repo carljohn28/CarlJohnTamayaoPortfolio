@@ -1,12 +1,19 @@
 <nav #header class="navbar finisher-header">
   <div class="logo">CJ</div>
-  <ul class="nav-links">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
+
+  <!-- Hamburger menu for mobile -->
+  <div class="menu-toggle" (click)="toggleMenu()">
+    &#9776;
+  </div>
+
+  <ul class="nav-links" [class.show]="menuOpen">
+    <li><a href="#home" (click)="closeMenu()">Home</a></li>
+    <li><a href="#about" (click)="closeMenu()">About</a></li>
+    <li><a href="#projects" (click)="closeMenu()">Projects</a></li>
+    <li><a href="#contact" (click)="closeMenu()">Contact</a></li>
   </ul>
 </nav>
+
 <div style="margin: 0; padding: 0;padding-top: 60px;" id="home">
 
   <div class="bgurl">
@@ -20,9 +27,10 @@
             <p class="intro-text">Introducing</p>
           </div>
           <h1 class="name">Hello Stranger!</h1>
-          <p style=" font-size: 1.5rem; width: 70%; text-align: left;">My name is Carl John, and I’m a Web Developer and
+          <p style=" font-size: clamp(1rem, 1.2vw, 1.5rem); text-align: left; padding-top: 1rem;">My name is Carl John,
+            and I’m a Web Developer and
             Programmer from Tuguegarao City, Cagayan.</p>
-          <button mat-raised-button>Resume</button>
+          <button mat-raised-button style=" margin-top: 1rem;">Resume</button>
         </div>
 
         <!-- RIGHT SIDE -->
@@ -30,7 +38,7 @@
           <div class="v-line top"></div>
 
           <div class="social-icons">
-            <a href="https://facebook.com" target="_blank">
+            <a href="https://www.facebook.com/carljohn.tamayao" target="_blank">
               <mat-icon>facebook</mat-icon>
             </a>
             <a href="https://twitter.com" target="_blank">
@@ -51,47 +59,35 @@
   </div>
 
 
-  <div #aboutSection id="about" class="finisher-about" style="position: relative; min-height: 70vh;  padding: 50px 0 0 0 ">
-    <h1
-      style="display:flex; text-align: center; justify-content: center; color: white; font-family: Sans-serif; font-family: 500px;"
-      class="autoShow">
-      ABOUT</h1>
+  <div #aboutSection id="about" class="finisher-about">
+    <h1 class="about-title autoShow">ABOUT</h1>
 
-    <div style="display: flex; justify-content: center; padding-top: 40px;">
-      <div
-        style="max-width: 60%; text-align: center; color: white; font-family: Sans-serif; font-size: 19px; font-weight: 700; display: flex; flex-direction: column; gap: 20px; line-height: 1.9;">
+    <div class="about-content">
+      <p>
+        Hello! I’m a passionate and dedicated <strong>Web Developer and Programmer</strong> with a strong commitment
+        to building efficient, responsive, and user-centered web applications. I create websites and systems that
+        combine
+        clean design with solid performance. I enjoy solving problems through code and transforming ideas into reliable,
+        real-world solutions.
+      </p>
 
-        <!-- <p class="autoShow"> -->
-        <p>
-          Hello! I’m a passionate and dedicated <strong>Web Developer and Programmer</strong> with a strong commitment
-          to
-          building efficient, responsive, and user-centered web applications. I create websites and systems that combine
-          clean design with solid performance. I enjoy solving problems through code and transforming ideas into
-          reliable,
-          real-world solutions.
-        </p>
+      <p>
+        I always aim to write clean, maintainable, and scalable code while ensuring every project I work on delivers a
+        smooth and engaging user experience. As a developer, I continuously learn and explore new technologies to stay
+        up to date with the ever-evolving tech landscape.
+      </p>
 
-        <p>
-          I always aim to write clean, maintainable, and scalable code while ensuring every project I work on delivers a
-          smooth and engaging user experience. As a developer, I continuously learn and explore new technologies to stay
-          up to date with the ever-evolving tech landscape.
-        </p>
-
-        <p>
-          I believe that great work comes from passion, collaboration, and a constant drive to improve — values I bring
-          to
-          every project I take on.
-        </p>
-
-      </div>
+      <p>
+        I believe that great work comes from passion, collaboration, and a constant drive to improve — values I bring to
+        every project I take on.
+      </p>
     </div>
-
   </div>
 
-  <div #skills class="bgurl1 finisher-header">
+
+  <div #skills class="bgurl1 finisher-skills" style="width: 100%;">
     <h1
-      style=" padding-top: 70px;display:flex; text-align: center; justify-content: center; color: white; font-family: Sans-serif; font-family: 500px;"
-      >
+      style="display:flex; text-align: center; justify-content: center; color: white; font-family: Sans-serif; font-family: 500px;">
       SKILLS</h1>
 
     <div class="toggle-wrapper">
@@ -104,70 +100,65 @@
         <div class="toggle-option" [class.active]="selectedTab === 'tools'" (click)="clickTools()">Tools</div>
       </div>
     </div>
-
-    <div *ngIf="stack === 1" >
-      <div class="image-grid4">
-        <div class="logo-item">
-          <img src="assets/html1.png" alt="HTML">
-          <span>Html</span>
-        </div>
-        <div class="logo-item">
-          <img src="assets/css.png" alt="CSS">
-          <span>Css</span>
-        </div>
-        <div class="logo-item">
-          <img src="assets/ts.png" alt="TypeScript">
-          <span>TypeScript</span>
-        </div>
-        <div class="logo-item">
-          <img src="assets/angularjs1.png" alt="AngularJS">
-          <span>AngularJS</span>
-        </div>
+    <!-- Tech Stack -->
+    <div *ngIf="stack === 1" class="image-grid">
+      <div class="logo-item">
+        <img src="assets/html1.png" alt="HTML">
+        <span>Html</span>
       </div>
-
-      <div class="image-grid3">
-        <div class="logo-item">
-          <img src="assets/php1.png" alt="Laravel">
-          <span>Php</span>
-        </div>
-        <div class="logo-item">
-          <img src="assets/laravel.png" alt="Laravel">
-          <span>Laravel</span>
-        </div>
-        <div class="logo-item">
-          <img src="assets/wordpress.png" alt="WordPress">
-          <span>WordPress</span>
-        </div>
+      <div class="logo-item">
+        <img src="assets/css.png" alt="CSS">
+        <span>Css</span>
+      </div>
+      <div class="logo-item">
+        <img src="assets/ts.png" alt="TypeScript">
+        <span>TypeScript</span>
+      </div>
+      <div class="logo-item">
+        <img src="assets/angularjs1.png" alt="AngularJS">
+        <span>AngularJS</span>
+      </div>
+      <div class="logo-item">
+        <img src="assets/php1.png" alt="PHP">
+        <span>Php</span>
+      </div>
+      <div class="logo-item">
+        <img src="assets/laravel.png" alt="Laravel">
+        <span>Laravel</span>
+      </div>
+      <div class="logo-item">
+        <img src="assets/wordpress.png" alt="WordPress">
+        <span>WordPress</span>
       </div>
     </div>
-    <div *ngIf="tools === 1 " >
-      <div class="image-grid4">
-        <div class="logo-item">
-          <img src="assets/figma.png" alt="HTML">
-          <span>Figma</span>
-        </div>
-        <div class="logo-item">
-          <img src="assets/github.png" alt="CSS">
-          <span>Github</span>
-        </div>
-        <div class="logo-item">
-          <img src="assets/vscode1.png" alt="TypeScript">
-          <span>VS Code</span>
-        </div>
-        <div class="logo-item">
-          <img src="assets/iis.png" alt="AngularJS">
-          <span>IIS</span>
-        </div>
+
+    <!-- Tools -->
+    <div *ngIf="tools === 1" class="image-grid">
+      <div class="logo-item">
+        <img src="assets/figma.png" alt="Figma">
+        <span>Figma</span>
+      </div>
+      <div class="logo-item">
+        <img src="assets/github.png" alt="Github">
+        <span>Github</span>
+      </div>
+      <div class="logo-item">
+        <img src="assets/vscode1.png" alt="VS Code">
+        <span>VS Code</span>
+      </div>
+      <div class="logo-item">
+        <img src="assets/iis.png" alt="IIS">
+        <span>IIS</span>
       </div>
     </div>
+
 
 
   </div>
 
   <div #project class="bgurl1 finisher-header" id="projects" style="padding-bottom: 50px; padding-top: 70px;">
     <h1
-      style="display:flex; text-align: center; justify-content: center; color: white; font-family: Sans-serif; font-family: 500px; margin-top: 20px;"
-     >
+      style="display:flex; text-align: center; justify-content: center; color: white; font-family: Sans-serif; font-family: 500px; margin-top: 20px;">
       PROJECTS</h1>
     <!-- Title
     <div class="projects-title" style="width: 100%;">
@@ -181,12 +172,14 @@
         <img class="project-image" src="/assets/usl.png" alt="Project Image">
         <div class="project-content">
           <h3 style="margin-top: 25px;">USL ERP</h3>
-          <p>This system was originally developed by our seniors, and as part of our project, we have continued to enhance it while maintaining its integrity and functionality, demonstrating a careful and thorough approach to development.</p>
+          <p>This system was originally developed by our seniors, and as part of our project, we have continued to
+            enhance it while maintaining its integrity and functionality, demonstrating a careful and thorough approach
+            to development.</p>
 
-            <!-- <p>This system was originally developed by our seniors, and we continued enhancing its modules as part of our
+          <!-- <p>This system was originally developed by our seniors, and we continued enhancing its modules as part of our
               project. My main contribution was on the reports module and the grade hiding and unhiding, which enables
               users to hide or unhide student grades based on their payment balance status..</p> -->
-          <img class="project-icon"  src="/assets/angularjs1.png" alt="Icon">
+          <img class="project-icon" src="/assets/angularjs1.png" alt="Icon">
         </div>
       </div>
 
@@ -214,7 +207,7 @@
             devastating typhoon that struck Cagayan, motivating us to create a platform that helps people prepare for
             and respond to natural disasters. The system provides real-time guidance on what to do and what to avoid
             during emergencies, while also showing nearby evacuation centers and GPS-based locations for safety</p>
-            <img class="project-icon" src="/assets/laravel.png" alt="Icon">
+          <img class="project-icon" src="/assets/laravel.png" alt="Icon">
         </div>
       </div>
 
@@ -227,14 +220,14 @@
   <div #footer class=" finisher-header" id="contact" style=" position: relative; margin: 0px;padding: 50px 0 0 0;">
     <div style="margin-left: 35px;">
       <h1
-        style="color: rgb(255, 255, 255);  font-size: 3rem;font-weight: bold; font-family: sans-serif; text-align: left;">
+        style="color: rgb(255, 255, 255);  font-size: clamp(1.5rem, 6vw, 5rem); font-weight: bold; font-family: sans-serif; text-align: left;">
         Dont be a stranger! 👋
       </h1>
       <p style="color: white; font-size: 1rem; font-family: sans-serif; margin-top: 20px;text-align: left;"> Connect
         with me online</p>
 
       <div class="social-icons1">
-        <a href="https://facebook.com" target="_blank">
+        <a href="https://www.facebook.com/carljohn.tamayao" target="_blank">
           <mat-icon>facebook</mat-icon>
         </a>
         <a href="https://github.com" target="_blank">

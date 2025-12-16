@@ -9,56 +9,84 @@
 } */
 /* Fixed Navbar */
 
+/* Navbar base */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 80px;
-  /* background: rgb(51, 45, 45); */
+  padding: 0 clamp(1rem, 4vw, 3rem);
+  height: clamp(60px, 8vw, 80px);
   display: flex;
   align-items: center;
-  /* vertical centering */
-  padding: 0 40px;
-  z-index: 10000;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  background: #020202ff;
+  z-index: 1000;
 }
 
-/* Logo on the left */
+/* Logo */
 .logo {
-  font-size: 1.8rem;
-  font-weight: bold;
   color: white;
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  font-weight: bold;
 }
 
-/* Center nav links in navbar */
+/* Desktop nav links centered */
 .nav-links {
-  position: absolute;
-  /* position independently */
-  left: 50%;
-  /* move starting point to middle */
-  transform: translateX(-50%);
-  /* center the whole list */
   list-style: none;
   display: flex;
-  gap: 40px;
-  margin: 0;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  margin: auto; /* center horizontally */
   padding: 0;
 }
 
-/* Links style */
+/* Link styling */
 .nav-links li a {
   color: white;
   text-decoration: none;
-  font-weight: 500;
-  font-size: 1.5rem;
-  transition: color 0.3s ease, transform 0.3s ease;
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  transition: color 0.3s ease;
 }
 
-/* Hover animation */
 .nav-links li a:hover {
   color: #ff926b;
-  transform: scale(1.1);
+}
+
+/* Hamburger icon (hidden on desktop) */
+.menu-toggle {
+  display: none;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  color: white;
+  cursor: pointer;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+    margin-left: auto;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;      /* just below navbar */
+    left: 0;
+    width: 100%;    /* full width */
+    flex-direction: column;
+    background: #0D0D0D;
+    overflow: hidden;
+    max-height: 0;  /* collapsed */
+    transition: max-height 0.3s ease;
+  }
+
+  /* when open */
+  .nav-links.show {
+    max-height: 300px; /* enough for 4 links */
+  }
+
+  .nav-links li {
+    padding: clamp(0.75rem, 2vw, 1.5rem) 0;
+    text-align: center;
+  }
 }
 
 /* Push content below navbar */
@@ -124,27 +152,31 @@ body {
   left: calc(50% + 0px);
 }
 
-.image-grid4 {
+.image-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  max-width: 800px;
-  /* Adjust to match the 4 columns */
-  margin: auto;
-  text-align: center;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* columns shrink to content */
+  gap: clamp(10px, 3vw, 24px);
+  justify-content: center;  /* centers the whole grid and last row */
+  justify-items: center;    /* centers items inside each column */
+  padding: clamp(1rem, 4vw, 2rem);
+  width: 100%;              /* full width container */
+  margin: 0 auto;
+  grid-auto-flow: row;      /* ensures wrapping into multiple rows */
 }
 
-.image-grid3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  max-width: 600px;
-  /* Narrower so it's centered */
-  margin: 20px auto 0 auto;
-  /* auto centers horizontally */
-  text-align: center;
+/* Medium screens - 3 columns approx */
+@media (max-width: 1024px) {
+  .image-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, max-content));
+  }
 }
 
+/* Small screens / mobile - 2 columns */
+@media (max-width: 768px) {
+  .image-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, max-content));
+  }
+}
 
 .logo-item {
   display: flex;
@@ -153,18 +185,19 @@ body {
 }
 
 .logo-item img {
-  width: 180px;
-  height: 180px;
+  width: clamp(100px, 22vw, 160px);
+  height: clamp(100px, 22vw, 160px);
   object-fit: contain;
-  padding: 10px;
 }
 
 .logo-item span {
-  font-size: 19px;
+  font-size: 1rem;
   font-weight: 700;
   color: white;
   font-family: Sans-serif;
 }
+
+
 
 .overlap-container {
   position: relative;
@@ -215,19 +248,52 @@ body {
   top: 60px;            */
 }
 
-.bgurl1 {
-  justify-content: center;
+.finisher-about {
+  position: relative;
+  padding: 70px 20px 70px 20px;
+  min-height: auto;         /* let height expand with content */
+       /* optional, for visibility */
+  color: white;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   text-align: center;
+}
+
+.about-title {
+  font-family: Sans-serif;
+  font-weight: 500;
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 40px;
+}
+
+.about-content {
+  max-width: clamp(40rem, 70vw, 60rem);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: Sans-serif;
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
+  line-height: clamp(1.4, 1.6, 2);
+}
+
+/* Optional: small screens adjustments */
+@media (max-width: 768px) {
+  .finisher-about {
+    padding: 40px 40px;
+  }
+
+  .about-title {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+  }
+}
+
+.bgurl1 {
   width: 100%;
-  min-height: 100vh;
-  /* background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.5)),
-    url('/assets/bg.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat; */
-  position: relative;
+  padding: 70px 20px 70px 20px;
   color: white;
+  text-align: center;
+  position: relative;
 }
 
 .line-text-container {
@@ -236,13 +302,21 @@ body {
   align-items: center;
   width: 90%;
 }
+@media (max-width: 768px) {
+  .line-text-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 90%;
+  }
+}
 
 /* LEFT SIDE */
 .left-side {
   display: flex;
   flex-direction: column;
   align-items: flex-start; /* text stays left */
-  width: 50%;
+  width: 80%;
 }
 .left-side button {
  /* centers button horizontally */
@@ -285,7 +359,7 @@ body {
 }
 
 .name {
-  font-size: 5rem;
+  font-size: clamp(1.5rem, 6vw, 5rem);
   font-weight: bold;
   font-family: sans-serif;
 }

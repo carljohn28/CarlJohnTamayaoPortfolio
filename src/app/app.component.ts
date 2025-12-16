@@ -138,8 +138,14 @@ tools = 0;
     });
   }
 
+  menuOpen = false; // mobile menu toggle
 
+  toggleMenu(): void {
+    this.menuOpen = !this.menuOpen;
+  }
 
-
+  closeMenu(): void {
+    this.menuOpen = false; // closes menu when a link is clicked
+  }
 
 }
